@@ -44,6 +44,9 @@ info:
   version: 1.0.0
 tags:
 - name: book
+servers:
+- url: http://localhost:8080
+  description: ローカル環境
 paths:
   /api/v1/books:
     get:
@@ -89,8 +92,3 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/findBooksResponse"
-servers:
-- url: http://localhost:8080
-  description: Auto generated value
-- url: http://0.0.0.0:8080
-  description: Auto generated value
