@@ -1,12 +1,13 @@
 package dev.ymkz.domain.repository;
 
+import dev.ymkz.domain.condition.BookSearchCondition;
 import dev.ymkz.domain.model.Book;
-import java.util.List;
+import dev.ymkz.domain.model.Pagination;
 
 public interface BookRepository {
-  List<Book> findMany(String isbn, String title);
+  Pagination<Book> findMany(BookSearchCondition condition);
 
-  Book findOne(String isbn);
+  Book findByIsbn(String isbn);
 
   void create(Book book);
 

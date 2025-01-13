@@ -1,0 +1,96 @@
+---
+openapi: 3.1.0
+components:
+  schemas:
+    Hit:
+      type: object
+      properties:
+        isbn:
+          type: string
+          examples:
+          - "9784621303252"
+        title:
+          type: string
+          examples:
+          - Effective Java 第3版
+        price:
+          type: integer
+          format: int32
+          examples:
+          - 4400
+    Pagination:
+      type: object
+      properties:
+        offset:
+          type: integer
+          format: int32
+        limit:
+          type: integer
+          format: int32
+        total:
+          type: integer
+          format: int32
+    findBooksResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: "#/components/schemas/Pagination"
+        hits:
+          type: array
+          items:
+            $ref: "#/components/schemas/Hit"
+info:
+  title: API仕様書
+  version: 1.0.0
+tags:
+- name: book
+paths:
+  /api/v1/books:
+    get:
+      summary: booksを検索する
+      operationId: findBooks
+      tags:
+      - book
+      parameters:
+      - name: isbn
+        in: query
+        schema:
+          type: string
+      - name: limit
+        in: query
+        schema:
+          type: string
+      - name: offset
+        in: query
+        schema:
+          type: string
+      - name: priceFrom
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: priceTo
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: sort
+        in: query
+        schema:
+          type: string
+      - name: title
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/findBooksResponse"
+servers:
+- url: http://localhost:8080
+  description: Auto generated value
+- url: http://0.0.0.0:8080
+  description: Auto generated value

@@ -1,5 +1,9 @@
-mp:
-  openapi:
-    extensions:
-      smallrye:
-        operationIdStrategy: METHOD
+quarkus:
+  smallrye-openapi:
+    store-schema-directory: spec
+  datasource:
+    db-kind: mysql
+    jdbc:
+      url: jdbc:mysql://localhost:3306/local_db
+    username: local_user
+    password: local_pass

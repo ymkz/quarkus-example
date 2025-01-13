@@ -1,18 +1,17 @@
 package dev.ymkz.domain.value;
 
-public record Isbn13(String value) {
+import jakarta.validation.constraints.Size;
+import java.util.Objects;
+
+public record Isbn13(@Size(min = 13, max = 13) String value) {
 
   public Isbn13 {
-    if (!isValid(value)) {
+    if (Objects.nonNull(value) && !isValid(value)) {
       throw new IllegalArgumentException("Invalid ISBN-13 format");
     }
   }
 
   private static boolean isValid(String value) {
-    if (value == null || value.length() != 13) {
-      return false;
-    }
-
     int sum = 0;
     for (int i = 0; i < 12; i++) {
       int digit = Character.getNumericValue(value.charAt(i));
