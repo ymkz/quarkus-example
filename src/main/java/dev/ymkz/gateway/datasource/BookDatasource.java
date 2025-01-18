@@ -17,6 +17,7 @@ public class BookDatasource implements BookRepository {
   @Override
   public Pagination<Book> findMany(BookSearchQuery query) {
     Log.info(query.toString());
+    Log.info(query.order().orderBy());
     var total = mapper.count(query);
     var content = mapper.list(query).stream().map(BookEntity::toBook).toList();
     Log.info("total: " + total + ", content: " + content);
@@ -29,11 +30,17 @@ public class BookDatasource implements BookRepository {
   }
 
   @Override
-  public void create(Book book) {}
+  public void create(Book book) {
+    return;
+  }
 
   @Override
-  public void update(Book book) {}
+  public void update(Book book) {
+    return;
+  }
 
   @Override
-  public void delete(Isbn13 isbn) {}
+  public void delete(Isbn13 isbn) {
+    return;
+  }
 }

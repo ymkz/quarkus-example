@@ -6,13 +6,15 @@ import dev.ymkz.domain.value.Isbn13;
 import dev.ymkz.domain.value.RangeInteger;
 import dev.ymkz.usecase.book.BookSearchUsecase;
 import jakarta.inject.Inject;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.ws.rs.DefaultValue;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
-import java.util.Optional;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
@@ -26,21 +28,21 @@ public class BookResource {
   @Produces(MediaType.APPLICATION_JSON)
   @Operation(operationId = "findBooks", summary = "booksを検索する")
   public FindBooksResponse findBooks(
-      @QueryParam("isbn") Optional<String> isbn,
-      @QueryParam("title") Optional<String> title,
-      @QueryParam("priceFrom") Integer priceFrom,
-      @QueryParam("priceTo") Integer priceTo,
-      @QueryParam("order") @DefaultValue("-price") String order,
-      @QueryParam("offset") @DefaultValue("1") Integer offset,
-      @QueryParam("limit") @DefaultValue("100") Integer limit) {
+      @QueryParam("isbn") String isbn,
+      @QueryParam("title") String title,
+      @QueryParam("priceFrom") @PositiveOrZero Integer priceFrom,
+      @QueryParam("priceTo") @PositiveOrZero Integer priceTo,
+      @QueryParam("order") @DefaultValue("-price") BookOrder order,
+      @QueryParam("offset") @Min(1) @DefaultValue("1") Integer offset,
+      @QueryParam("limit") @Min(1) @Max(100) @DefaultValue("100") Integer limit) {
 
     var data =
         bookSearchUsecase.execute(
             new BookSearchQuery(
-                isbn.map(Isbn13::of),
+                isbn != null ? Isbn13.of(isbn) : null,
                 title,
-                new RangeInteger(priceFrom, priceTo),
-                BookOrder.of("-price"),
+                RangeInteger.of(priceFrom, priceTo),
+                order,
                 offset,
                 limit));
 

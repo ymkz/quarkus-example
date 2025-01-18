@@ -8,6 +8,10 @@ public record RangeInteger(Integer min, Integer max) {
     }
   }
 
+  public static RangeInteger of(Integer min, Integer max) {
+    return new RangeInteger(min, max);
+  }
+
   public boolean contains(int value) {
     return value >= min && value <= max;
   }

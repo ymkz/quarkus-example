@@ -2,6 +2,10 @@
   "openapi" : "3.1.0",
   "components" : {
     "schemas" : {
+      "BookOrder" : {
+        "type" : "string",
+        "enum" : [ "+price", "-price" ]
+      },
       "Hit" : {
         "type" : "object",
         "properties" : {
@@ -75,14 +79,15 @@
           "in" : "query",
           "schema" : {
             "type" : "string"
-          },
-          "required" : false
+          }
         }, {
           "name" : "limit",
           "in" : "query",
           "schema" : {
             "type" : "integer",
             "format" : "int32",
+            "maximum" : 100,
+            "minimum" : 1,
             "default" : "100"
           }
         }, {
@@ -91,36 +96,41 @@
           "schema" : {
             "type" : "integer",
             "format" : "int32",
+            "minimum" : 1,
             "default" : "1"
           }
         }, {
           "name" : "order",
           "in" : "query",
           "schema" : {
-            "type" : "string",
-            "default" : "-price"
+            "allOf" : [ {
+              "$ref" : "#/components/schemas/BookOrder"
+            }, {
+              "default" : "-price"
+            } ]
           }
         }, {
           "name" : "priceFrom",
           "in" : "query",
           "schema" : {
             "type" : "integer",
-            "format" : "int32"
+            "format" : "int32",
+            "minimum" : 0
           }
         }, {
           "name" : "priceTo",
           "in" : "query",
           "schema" : {
             "type" : "integer",
-            "format" : "int32"
+            "format" : "int32",
+            "minimum" : 0
           }
         }, {
           "name" : "title",
           "in" : "query",
           "schema" : {
             "type" : "string"
-          },
-          "required" : false
+          }
         } ],
         "responses" : {
           "200" : {
