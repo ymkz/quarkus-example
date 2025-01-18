@@ -10,6 +10,4 @@ public record BookSearchQuery(
     RangeInteger priceRange,
     BookOrder order,
     Integer offset,
-    Integer limit) {
-
-    }
+    Integer limit) {}
