@@ -1,10 +1,12 @@
 package dev.ymkz.presenter.book;
 
-import dev.ymkz.domain.condition.BookSearchCondition;
+import dev.ymkz.domain.model.BookSearchQuery;
+import dev.ymkz.domain.value.BookOrder;
 import dev.ymkz.domain.value.Isbn13;
 import dev.ymkz.domain.value.RangeInteger;
 import dev.ymkz.usecase.book.BookSearchUsecase;
 import jakarta.inject.Inject;
+import jakarta.ws.rs.DefaultValue;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
@@ -24,22 +26,23 @@ public class BookResource {
   @Produces(MediaType.APPLICATION_JSON)
   @Operation(operationId = "findBooks", summary = "booksを検索する")
   public FindBooksResponse findBooks(
-      @QueryParam("isbn") String isbn,
-      @QueryParam("title") String title,
+      @QueryParam("isbn") Optional<String> isbn,
+      @QueryParam("title") Optional<String> title,
       @QueryParam("priceFrom") Integer priceFrom,
       @QueryParam("priceTo") Integer priceTo,
-      @QueryParam("sort") String sort,
-      @QueryParam("offset") String offset,
-      @QueryParam("limit") String limit) {
+      @QueryParam("order") @DefaultValue("-price") String order,
+      @QueryParam("offset") @DefaultValue("1") Integer offset,
+      @QueryParam("limit") @DefaultValue("100") Integer limit) {
 
     var data =
         bookSearchUsecase.execute(
-            new BookSearchCondition(
-                new Isbn13(isbn),
+            new BookSearchQuery(
+                isbn.map(Isbn13::of),
                 title,
                 new RangeInteger(priceFrom, priceTo),
-                Optional.ofNullable(offset).map(Integer::valueOf).orElse(null),
-                Optional.ofNullable(limit).map(Integer::valueOf).orElse(null)));
+                BookOrder.of("-price"),
+                offset,
+                limit));
 
     return FindBooksResponse.of(data);
   }

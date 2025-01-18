@@ -1,6 +1,6 @@
 package dev.ymkz.gateway.datasource;
 
-import dev.ymkz.domain.condition.BookSearchCondition;
+import dev.ymkz.domain.model.BookSearchQuery;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -17,7 +17,7 @@ public interface BookMapper {
         ORDER BY
             price DESC
     """)
-  int count(BookSearchCondition condition);
+  int count(BookSearchQuery query);
 
   @Select(
       """
@@ -31,5 +31,5 @@ public interface BookMapper {
         ORDER BY
             price DESC
     """)
-  List<BookEntity> list(BookSearchCondition condition);
+  List<BookEntity> list(BookSearchQuery query);
 }

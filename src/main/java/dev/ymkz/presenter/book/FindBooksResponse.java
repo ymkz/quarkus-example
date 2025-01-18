@@ -19,7 +19,7 @@ public record FindBooksResponse(Pagination pagination, List<Hit> hits) {
     }
   }
 
-  public static FindBooksResponse of(dev.ymkz.domain.model.Pagination<Book> data) {
+  public static FindBooksResponse of(dev.ymkz.domain.value.Pagination<Book> data) {
     return new FindBooksResponse(
         new Pagination(data.offset(), data.limit(), data.total()),
         data.content().stream().map(Hit::of).toList());

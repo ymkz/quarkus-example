@@ -59,14 +59,24 @@ paths:
         in: query
         schema:
           type: string
+        required: false
       - name: limit
         in: query
         schema:
-          type: string
+          type: integer
+          format: int32
+          default: "100"
       - name: offset
         in: query
         schema:
+          type: integer
+          format: int32
+          default: "1"
+      - name: order
+        in: query
+        schema:
           type: string
+          default: -price
       - name: priceFrom
         in: query
         schema:
@@ -77,14 +87,11 @@ paths:
         schema:
           type: integer
           format: int32
-      - name: sort
-        in: query
-        schema:
-          type: string
       - name: title
         in: query
         schema:
           type: string
+        required: false
       responses:
         "200":
           description: OK

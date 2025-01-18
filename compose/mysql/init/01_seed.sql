@@ -12,9 +12,11 @@ INSERT INTO publishers (publisher_name, created_at, updated_at, deleted_at) VALU
 ('Tuttle Publishing', CURRENT_TIMESTAMP, NULL, NULL),
 ('HarperCollins', CURRENT_TIMESTAMP, NULL, NULL);
 
-INSERT INTO books (isbn, title, author_id, publisher_id, published_at, created_at, updated_at, deleted_at) VALUES
-('9784101000014', 'ノルウェイの森', 1, 1, '1987-09-04 00:00:00', CURRENT_TIMESTAMP, NULL, NULL),
-('9780571224142', 'Never Let Me Go', 2, 3, '2005-03-03 00:00:00', CURRENT_TIMESTAMP, NULL, NULL),
-('9780679752702', 'The Sailor Who Fell from Grace with the Sea', 3, 3, '1963-04-01 00:00:00', CURRENT_TIMESTAMP, NULL, NULL),
-('9784805310553', '容疑者Xの献身', 4, 4, '2005-08-06 00:00:00', CURRENT_TIMESTAMP, NULL, NULL),
-('9784770030873', 'Out', 5, 5, '1997-06-20 00:00:00', CURRENT_TIMESTAMP, NULL, NULL);
+INSERT INTO book_status (`status`) VALUES ('UNPUBLISHED'), ('PUBLISHED'), ('OUT_OF_PRINT');
+
+INSERT INTO books (isbn, title, price, status, author_id, publisher_id, published_at, created_at, updated_at, deleted_at) VALUES
+('9783832185923', 'ノルウェイの森', 1000, 'PUBLISHED', 1, 1, '1987-09-04 00:00:00', CURRENT_TIMESTAMP, NULL, NULL),
+('9784621303252', 'Never Let Me Go', 12000, 'OUT_OF_PRINT', 2, 3, '2005-03-03 00:00:00', CURRENT_TIMESTAMP, NULL, NULL),
+('9780679750154', 'The Sailor Who Fell from Grace with the Sea', 5500, 'PUBLISHED', 3, 3, '1963-04-01 00:00:00', CURRENT_TIMESTAMP, NULL, NULL),
+('9780312375065', '容疑者Xの献身', 780, 'PUBLISHED', 4, 4, '2005-08-06 00:00:00', CURRENT_TIMESTAMP, NULL, NULL),
+('9784906649006', 'Out', 2000, 'UNPUBLISHED', 5, 5, '1997-06-20 00:00:00', CURRENT_TIMESTAMP, NULL, NULL);

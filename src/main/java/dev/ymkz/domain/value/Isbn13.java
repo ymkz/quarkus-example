@@ -1,14 +1,18 @@
 package dev.ymkz.domain.value;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import java.util.Objects;
 
-public record Isbn13(@Size(min = 13, max = 13) String value) {
+public record Isbn13(@NotBlank @Size(min = 13, max = 13) String value) {
 
   public Isbn13 {
-    if (Objects.nonNull(value) && !isValid(value)) {
+    if (!isValid(value)) {
       throw new IllegalArgumentException("Invalid ISBN-13 format");
     }
+  }
+
+  public static Isbn13 of(String value) {
+    return new Isbn13(value);
   }
 
   private static boolean isValid(String value) {

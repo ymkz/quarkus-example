@@ -1,11 +1,12 @@
 package dev.ymkz.domain.repository;
 
-import dev.ymkz.domain.condition.BookSearchCondition;
 import dev.ymkz.domain.model.Book;
-import dev.ymkz.domain.model.Pagination;
+import dev.ymkz.domain.model.BookSearchQuery;
+import dev.ymkz.domain.value.Isbn13;
+import dev.ymkz.domain.value.Pagination;
 
 public interface BookRepository {
-  Pagination<Book> findMany(BookSearchCondition condition);
+  Pagination<Book> findMany(BookSearchQuery query);
 
   Book findByIsbn(String isbn);
 
@@ -13,5 +14,5 @@ public interface BookRepository {
 
   void update(Book book);
 
-  void delete(String isbn);
+  void delete(Isbn13 isbn);
 }
