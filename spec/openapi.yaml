@@ -57,6 +57,11 @@ components:
           type: string
           examples:
           - O'Reilly
+    Instant:
+      type: string
+      format: date-time
+      examples:
+      - 2022-03-10T16:15:50Z
     Pagination:
       type: object
       properties:
@@ -94,11 +99,14 @@ paths:
       tags:
       - book
       parameters:
-      - name: isbn
+      - description: ISBN-13:完全一致
+        example: "9784873115658"
+        name: isbn
         in: query
         schema:
           type: string
-      - name: limit
+      - description: 取得数
+        name: limit
         in: query
         schema:
           type: integer
@@ -106,32 +114,54 @@ paths:
           maximum: 100
           minimum: 1
           default: "100"
-      - name: offset
+      - description: 取得開始位置
+        name: offset
         in: query
         schema:
           type: integer
           format: int32
           minimum: 0
           default: "0"
-      - name: order
+      - description: 検索結果の並び順
+        name: order
         in: query
         schema:
           allOf:
           - $ref: "#/components/schemas/BookOrder"
           - default: -price
-      - name: priceFrom
+      - description: 価格:下限
+        name: priceFrom
         in: query
         schema:
           type: integer
           format: int32
           minimum: 0
-      - name: priceTo
+      - description: 価格:上限
+        name: priceTo
         in: query
         schema:
           type: integer
           format: int32
           minimum: 0
-      - name: title
+      - description: 出版日:終了
+        example: 2025-01-01T00:00:00Z
+        name: publishedTimeEnd
+        in: query
+        schema:
+          $ref: "#/components/schemas/Instant"
+      - description: 出版日:開始
+        example: 2025-01-01T00:00:00Z
+        name: publishedTimeStart
+        in: query
+        schema:
+          $ref: "#/components/schemas/Instant"
+      - description: ステータス
+        name: status
+        in: query
+        schema:
+          $ref: "#/components/schemas/BookStatus"
+      - description: 書籍タイトル:部分一致
+        name: title
         in: query
         schema:
           type: string

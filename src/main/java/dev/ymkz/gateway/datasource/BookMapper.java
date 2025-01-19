@@ -41,6 +41,15 @@ public interface BookMapper {
             <if test="priceRange.max != null">
                 AND b.price &lt;= #{priceRange.max}
             </if>
+            <if test="status != null">
+                AND b.status = #{status}
+            </if>
+            <if test="publishedTimeRange.start != null">
+                AND b.published_at &gt;= #{publishedTimeRange.start}
+            </if>
+            <if test="publishedTimeRange.end != null">
+                AND b.published_at &lt;= #{publishedTimeRange.end}
+            </if>
         </script>
     """)
   int count(BookSearchQuery query);
@@ -89,6 +98,15 @@ public interface BookMapper {
             </if>
             <if test="priceRange.max != null">
                 AND b.price &lt;= #{priceRange.max}
+            </if>
+            <if test="status != null">
+                AND b.status = #{status}
+            </if>
+            <if test="publishedTimeRange.start != null">
+                AND b.published_at &gt;= #{publishedTimeRange.start}
+            </if>
+            <if test="publishedTimeRange.end != null">
+                AND b.published_at &lt;= #{publishedTimeRange.end}
             </if>
         ORDER BY
             #{order.orderBy}

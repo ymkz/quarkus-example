@@ -15,6 +15,7 @@ dependencies {
     implementation libs.quarkus.rest
     implementation libs.quarkus.rest.jackson
     implementation libs.quarkus.config.yaml
+    implementation libs.quarkus.logging.json
     implementation libs.quarkus.hibernate.validator
     implementation libs.quarkus.smallrye.openapi
     implementation libs.quarkus.smallrye.health

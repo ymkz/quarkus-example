@@ -7,3 +7,6 @@ quarkus:
       url: jdbc:mysql://localhost:3306/local_db
     username: local_user
     password: local_pass
+  log:
+    console:
+      json: false
