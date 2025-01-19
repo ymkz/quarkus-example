@@ -35,6 +35,12 @@ public interface BookMapper {
             <if test="title != null">
                 AND b.title LIKE '%' || #{title} || '%'
             </if>
+            <if test="priceRange.min != null">
+                AND b.price &gt;= #{priceRange.min}
+            </if>
+            <if test="priceRange.max != null">
+                AND b.price &lt;= #{priceRange.max}
+            </if>
         </script>
     """)
   int count(BookSearchQuery query);
@@ -44,18 +50,18 @@ public interface BookMapper {
         <script>
         SELECT
             b.id,
-				    b.isbn,
-				    b.title,
+            b.isbn,
+            b.title,
             b.price,
             b.status,
-				    b.author_id,
-				    a.author_name,
-				    b.publisher_id,
-				    p.publisher_name,
-				    b.published_at,
-				    b.created_at,
-				    b.updated_at,
-				    b.deleted_at
+            b.author_id,
+            a.author_name,
+            b.publisher_id,
+            p.publisher_name,
+            b.published_at,
+            b.created_at,
+            b.updated_at,
+            b.deleted_at
         FROM
             books as b
         INNER JOIN
@@ -77,6 +83,12 @@ public interface BookMapper {
             </if>
             <if test="title != null">
                 AND b.title LIKE '%' || #{title} || '%'
+            </if>
+            <if test="priceRange.min != null">
+                AND b.price &gt;= #{priceRange.min}
+            </if>
+            <if test="priceRange.max != null">
+                AND b.price &lt;= #{priceRange.max}
             </if>
         ORDER BY
             #{order.orderBy}

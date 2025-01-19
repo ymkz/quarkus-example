@@ -24,21 +24,39 @@ components:
         isbn:
           type: string
           examples:
-          - "9784621303252"
+          - "9784873115658"
         title:
           type: string
           examples:
-          - Effective Java 第3版
+          - リーダブルコード
         price:
           type: integer
           format: int32
           examples:
-          - 4400
+          - 2640
         status:
           type: string
           examples:
           - PUBLISHED
           $ref: "#/components/schemas/BookStatus"
+        authorId:
+          type: integer
+          format: int32
+          examples:
+          - 1
+        authorName:
+          type: string
+          examples:
+          - Dustin Boswell
+        publisherId:
+          type: integer
+          format: int32
+          examples:
+          - 1
+        publisherName:
+          type: string
+          examples:
+          - O'Reilly
     Pagination:
       type: object
       properties:
