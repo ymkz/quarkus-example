@@ -8,7 +8,7 @@ import dev.ymkz.domain.value.Pagination;
 public interface BookRepository {
   Pagination<Book> findMany(BookSearchQuery query);
 
-  Book findByIsbn(String isbn);
+  Book findByIsbn(Isbn13 isbn);
 
   void create(Book book);
 

@@ -10,17 +10,28 @@ public interface BookMapper {
 
   @Select(
       """
+        <script>
         SELECT
             COUNT(1)
         FROM
             books
+        WHERE
+            1 = 1
+            <if test="isbn != null">
+                AND isbn = #{isbn.value}
+            </if>
+            <if test="title != null">
+                AND title LIKE '%' || #{title} || '%'
+            </if>
         ORDER BY
-            price DESC
+            #{order.orderBy}
+        </script>
     """)
   int count(BookSearchQuery query);
 
   @Select(
       """
+        <script>
         SELECT
             id,
             isbn,
@@ -28,8 +39,17 @@ public interface BookMapper {
             price
         FROM
             books
+        WHERE
+            1 = 1
+            <if test="isbn != null">
+                AND isbn = #{isbn.value}
+            </if>
+            <if test="title != null">
+                AND title LIKE '%' || #{title} || '%'
+            </if>
         ORDER BY
-            price DESC
+            #{order.orderBy}
+        </script>
     """)
   List<BookEntity> list(BookSearchQuery query);
 }
