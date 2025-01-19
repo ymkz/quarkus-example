@@ -171,7 +171,6 @@
           }
         }, {
           "description" : "出版日:終了",
-          "example" : "2025-01-01T00:00:00Z",
           "name" : "publishedTimeEnd",
           "in" : "query",
           "schema" : {
@@ -179,7 +178,6 @@
           }
         }, {
           "description" : "出版日:開始",
-          "example" : "2025-01-01T00:00:00Z",
           "name" : "publishedTimeStart",
           "in" : "query",
           "schema" : {

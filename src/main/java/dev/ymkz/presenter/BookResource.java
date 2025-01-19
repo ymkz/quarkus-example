@@ -40,12 +40,9 @@ public class BookResource {
       @QueryParam("priceFrom") @Parameter(description = "価格:下限") @PositiveOrZero Integer priceFrom,
       @QueryParam("priceTo") @Parameter(description = "価格:上限") @PositiveOrZero Integer priceTo,
       @QueryParam("status") @Parameter(description = "ステータス") BookStatus status,
-      @QueryParam("publishedTimeStart")
-          @Parameter(description = "出版日:開始", example = "2025-01-01T00:00:00Z")
+      @QueryParam("publishedTimeStart") @Parameter(description = "出版日:開始")
           Instant publishedTimeStart,
-      @QueryParam("publishedTimeEnd")
-          @Parameter(description = "出版日:終了", example = "2025-01-01T00:00:00Z")
-          Instant publishedTimeEnd,
+      @QueryParam("publishedTimeEnd") @Parameter(description = "出版日:終了") Instant publishedTimeEnd,
       @QueryParam("order") @Parameter(description = "並び順") @DefaultValue("-price") BookOrder order,
       @QueryParam("offset") @Parameter(description = "取得開始位置") @Min(0) @DefaultValue("0")
           Integer offset,
