@@ -122,7 +122,7 @@ paths:
           format: int32
           minimum: 0
           default: "0"
-      - description: 検索結果の並び順
+      - description: 並び順
         name: order
         in: query
         schema:

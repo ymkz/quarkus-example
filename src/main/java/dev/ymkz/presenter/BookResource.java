@@ -46,7 +46,7 @@ public class BookResource {
       @QueryParam("publishedTimeEnd")
           @Parameter(description = "出版日:終了", example = "2025-01-01T00:00:00Z")
           Instant publishedTimeEnd,
-      @QueryParam("order") @Parameter(description = "検索結果の並び順") @DefaultValue("-price")
+      @QueryParam("order") @Parameter(description = "並び順") @DefaultValue("-price")
           BookOrder order,
       @QueryParam("offset") @Parameter(description = "取得開始位置") @Min(0) @DefaultValue("0")
           Integer offset,
