@@ -43,7 +43,8 @@ public class BookResource {
       @QueryParam("publishedTimeStart") @Parameter(description = "出版日:開始")
           Instant publishedTimeStart,
       @QueryParam("publishedTimeEnd") @Parameter(description = "出版日:終了") Instant publishedTimeEnd,
-      @QueryParam("order") @Parameter(description = "並び順") @DefaultValue("-price") BookOrder order,
+      @QueryParam("order") @Parameter(description = "並び順") @DefaultValue("-published_at")
+          BookOrder order,
       @QueryParam("offset") @Parameter(description = "取得開始位置") @Min(0) @DefaultValue("0")
           Integer offset,
       @QueryParam("limit") @Parameter(description = "取得数") @Min(1) @Max(100) @DefaultValue("100")

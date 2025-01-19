@@ -8,7 +8,13 @@ public enum BookOrder {
   PRICE_ASC("+price", "価格の昇順"),
 
   @JsonProperty("-price")
-  PRICE_DESC("-price", "価格の降順");
+  PRICE_DESC("-price", "価格の降順"),
+
+  @JsonProperty("+published_at")
+  PUBLISHED_AT_ASC("+published_at", "出版日の昇順"),
+
+  @JsonProperty("-published_at")
+  PUBLISHED_AT_DESC("-published_at", "出版日の降順");
 
   private final String _value;
 
@@ -32,8 +38,8 @@ public enum BookOrder {
    */
   public String getOrderBy() {
     var symbol = _value.substring(0, 1);
-    var column = _value.substring(1);
+    var target = _value.substring(1);
     var order = symbol.equals("+") ? "ASC" : "DESC";
-    return column + " " + order;
+    return target + " " + order;
   }
 }

@@ -7,6 +7,8 @@ components:
       enum:
       - +price
       - -price
+      - +published_at
+      - -published_at
     BookStatus:
       type: string
       enum:
@@ -128,7 +130,7 @@ paths:
         schema:
           allOf:
           - $ref: "#/components/schemas/BookOrder"
-          - default: -price
+          - default: -published_at
       - description: 価格:下限
         name: priceFrom
         in: query

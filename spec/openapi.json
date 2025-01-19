@@ -4,7 +4,7 @@
     "schemas" : {
       "BookOrder" : {
         "type" : "string",
-        "enum" : [ "+price", "-price" ]
+        "enum" : [ "+price", "-price", "+published_at", "-published_at" ]
       },
       "BookStatus" : {
         "type" : "string",
@@ -148,7 +148,7 @@
             "allOf" : [ {
               "$ref" : "#/components/schemas/BookOrder"
             }, {
-              "default" : "-price"
+              "default" : "-published_at"
             } ]
           }
         }, {
