@@ -1,5 +1,9 @@
 quarkus:
+  smallrye-openapi:
+    store-schema-directory: spec
   datasource:
+    devservices:
+      enabled: false
     db-kind: mysql
     jdbc:
       url: jdbc:mysql://localhost:3306/local_db

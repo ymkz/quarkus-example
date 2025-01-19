@@ -1,10 +1,5 @@
 quarkus:
   profile: local
-  smallrye-openapi:
-    store-schema-directory: spec
-  datasource:
-    devservices:
-      enabled: false
   http:
     access-log:
       enabled: true
