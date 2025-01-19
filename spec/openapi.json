@@ -6,9 +6,18 @@
         "type" : "string",
         "enum" : [ "+price", "-price" ]
       },
+      "BookStatus" : {
+        "type" : "string",
+        "enum" : [ "UNPUBLISHED", "PUBLISHED", "OUT_OF_PRINT" ]
+      },
       "Hit" : {
         "type" : "object",
         "properties" : {
+          "id" : {
+            "type" : "integer",
+            "format" : "int64",
+            "examples" : [ 1 ]
+          },
           "isbn" : {
             "type" : "string",
             "examples" : [ "9784621303252" ]
@@ -21,6 +30,11 @@
             "type" : "integer",
             "format" : "int32",
             "examples" : [ 4400 ]
+          },
+          "status" : {
+            "type" : "string",
+            "examples" : [ "PUBLISHED" ],
+            "$ref" : "#/components/schemas/BookStatus"
           }
         }
       },
@@ -96,8 +110,8 @@
           "schema" : {
             "type" : "integer",
             "format" : "int32",
-            "minimum" : 1,
-            "default" : "1"
+            "minimum" : 0,
+            "default" : "0"
           }
         }, {
           "name" : "order",

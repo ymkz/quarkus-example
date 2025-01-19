@@ -1,4 +1,4 @@
-package dev.ymkz.usecase.book;
+package dev.ymkz.usecase;
 
 import dev.ymkz.domain.model.Book;
 import dev.ymkz.domain.model.BookSearchQuery;

@@ -14,17 +14,27 @@ public interface BookMapper {
         SELECT
             COUNT(1)
         FROM
-            books
+            books as b
+        INNER JOIN
+            (
+                SELECT id, author_name
+                FROM authors
+                WHERE deleted_at IS NULL
+            ) as a ON b.author_id = a.id
+        INNER JOIN
+            (
+                SELECT id, publisher_name
+                FROM publishers
+                WHERE deleted_at IS NULL
+            ) as p ON b.publisher_id = p.id
         WHERE
-            1 = 1
+            b.deleted_at IS NULL
             <if test="isbn != null">
-                AND isbn = #{isbn.value}
+                AND b.isbn = #{isbn.value}
             </if>
             <if test="title != null">
-                AND title LIKE '%' || #{title} || '%'
+                AND b.title LIKE '%' || #{title} || '%'
             </if>
-        ORDER BY
-            #{order.orderBy}
         </script>
     """)
   int count(BookSearchQuery query);
@@ -33,22 +43,47 @@ public interface BookMapper {
       """
         <script>
         SELECT
-            id,
-            isbn,
-            title,
-            price
+            b.id,
+				    b.isbn,
+				    b.title,
+            b.price,
+            b.status,
+				    b.author_id,
+				    a.author_name,
+				    b.publisher_id,
+				    p.publisher_name,
+				    b.published_at,
+				    b.created_at,
+				    b.updated_at,
+				    b.deleted_at
         FROM
-            books
+            books as b
+        INNER JOIN
+            (
+                SELECT id, author_name
+                FROM authors
+                WHERE deleted_at IS NULL
+            ) as a ON b.author_id = a.id
+        INNER JOIN
+            (
+                SELECT id, publisher_name
+                FROM publishers
+                WHERE deleted_at IS NULL
+            ) as p ON b.publisher_id = p.id
         WHERE
-            1 = 1
+            b.deleted_at IS NULL
             <if test="isbn != null">
-                AND isbn = #{isbn.value}
+                AND b.isbn = #{isbn.value}
             </if>
             <if test="title != null">
-                AND title LIKE '%' || #{title} || '%'
+                AND b.title LIKE '%' || #{title} || '%'
             </if>
         ORDER BY
             #{order.orderBy}
+        LIMIT
+            #{limit}
+        OFFSET
+            #{offset}
         </script>
     """)
   List<BookEntity> list(BookSearchQuery query);

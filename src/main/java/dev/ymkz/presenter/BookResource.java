@@ -1,10 +1,10 @@
-package dev.ymkz.presenter.book;
+package dev.ymkz.presenter;
 
 import dev.ymkz.domain.model.BookSearchQuery;
 import dev.ymkz.domain.value.BookOrder;
-import dev.ymkz.domain.value.Isbn13;
+import dev.ymkz.domain.value.Isbn;
 import dev.ymkz.domain.value.RangeInteger;
-import dev.ymkz.usecase.book.BookSearchUsecase;
+import dev.ymkz.usecase.BookSearchUsecase;
 import jakarta.inject.Inject;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -33,13 +33,13 @@ public class BookResource {
       @QueryParam("priceFrom") @PositiveOrZero Integer priceFrom,
       @QueryParam("priceTo") @PositiveOrZero Integer priceTo,
       @QueryParam("order") @DefaultValue("-price") BookOrder order,
-      @QueryParam("offset") @Min(1) @DefaultValue("1") Integer offset,
+      @QueryParam("offset") @Min(0) @DefaultValue("0") Integer offset,
       @QueryParam("limit") @Min(1) @Max(100) @DefaultValue("100") Integer limit) {
 
     var data =
         bookSearchUsecase.execute(
             new BookSearchQuery(
-                isbn != null ? Isbn13.of(isbn) : null,
+                isbn != null ? Isbn.of(isbn) : null,
                 title,
                 RangeInteger.of(priceFrom, priceTo),
                 order,
