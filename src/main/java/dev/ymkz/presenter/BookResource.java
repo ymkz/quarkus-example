@@ -12,8 +12,6 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.core.MediaType;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
@@ -61,15 +59,7 @@ public class BookResource {
                 queryParam.title(),
                 RangeInteger.of(queryParam.priceFrom(), queryParam.priceTo()),
                 queryParam.status(),
-                RangeTime.of(
-                    queryParam.publishedTimeStart() != null
-                        ? LocalDateTime.ofInstant(
-                            queryParam.publishedTimeStart(), ZoneId.of("Asia/Tokyo"))
-                        : null,
-                    queryParam.publishedTimeEnd() != null
-                        ? LocalDateTime.ofInstant(
-                            queryParam.publishedTimeEnd(), ZoneId.of("Asia/Tokyo"))
-                        : null),
+                RangeTime.of(queryParam.publishedTimeStart(), queryParam.publishedTimeEnd()),
                 queryParam.order(),
                 queryParam.offset(),
                 queryParam.limit()));

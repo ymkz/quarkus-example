@@ -1,6 +1,8 @@
 package dev.ymkz.domain.value;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 public record RangeTime(LocalDateTime start, LocalDateTime end) {
 
@@ -10,7 +12,9 @@ public record RangeTime(LocalDateTime start, LocalDateTime end) {
     }
   }
 
-  public static RangeTime of(LocalDateTime start, LocalDateTime end) {
-    return new RangeTime(start, end);
+  public static RangeTime of(Instant start, Instant end) {
+    return new RangeTime(
+        start != null ? LocalDateTime.ofInstant(start, ZoneId.of("Asia/Tokyo")) : null,
+        end != null ? LocalDateTime.ofInstant(end, ZoneId.of("Asia/Tokyo")) : null);
   }
 }
