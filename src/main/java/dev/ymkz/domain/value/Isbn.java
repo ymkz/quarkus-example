@@ -12,6 +12,9 @@ public record Isbn(@NotBlank @Size(min = 13, max = 13) String value) {
   }
 
   public static Isbn of(String value) {
+    if (value == null) {
+      return null;
+    }
     return new Isbn(value);
   }
 

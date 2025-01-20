@@ -55,7 +55,7 @@ public class BookResource {
     var data =
         bookSearchUsecase.execute(
             new BookSearchQuery(
-                queryParam.isbn() != null ? Isbn.of(queryParam.isbn()) : null,
+                Isbn.of(queryParam.isbn()),
                 queryParam.title(),
                 RangeInteger.of(queryParam.priceFrom(), queryParam.priceTo()),
                 queryParam.status(),
