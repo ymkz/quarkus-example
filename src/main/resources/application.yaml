@@ -5,3 +5,5 @@ quarkus:
       enabled: true
       exclude-pattern: /q/.*
       pattern: '{"method":"%{METHOD}","path":"%{REQUEST_URL}","query":"%{QUERY_STRING}","status":%{RESPONSE_CODE},"responseSize":%{BYTES_SENT},"durationMs":%{RESPONSE_TIME},"userAgent":"%{i,User-Agent}","referer":"%{i,Referer}"}'
+  mybatis:
+    map-underscore-to-camel-case: true

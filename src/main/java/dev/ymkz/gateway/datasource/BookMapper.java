@@ -41,8 +41,11 @@ public interface BookMapper {
             <if test="priceRange.max != null">
                 AND b.price &lt;= #{priceRange.max}
             </if>
-            <if test="status != null">
-                AND b.status = #{status}
+            <if test="statuses != null">
+                AND b.status IN
+                <foreach collection="statuses" item="status" separator="," open="(" close=")">
+                    #{status}
+                </foreach>
             </if>
             <if test="publishedTimeRange.start != null">
                 AND b.published_at &gt;= #{publishedTimeRange.start}
@@ -99,8 +102,11 @@ public interface BookMapper {
             <if test="priceRange.max != null">
                 AND b.price &lt;= #{priceRange.max}
             </if>
-            <if test="status != null">
-                AND b.status = #{status}
+            <if test="statuses != null">
+                AND b.status IN
+                <foreach collection="statuses" item="status" separator="," open="(" close=")">
+                    #{status}
+                </foreach>
             </if>
             <if test="publishedTimeRange.start != null">
                 AND b.published_at &gt;= #{publishedTimeRange.start}
