@@ -13,8 +13,10 @@ quarkus-logging-json = { group = "io.quarkus", name = "quarkus-logging-json", ve
 quarkus-hibernate-validator = { group = "io.quarkus", name = "quarkus-hibernate-validator", version.ref = "quarkus" }
 quarkus-smallrye-openapi = { group = "io.quarkus", name = "quarkus-smallrye-openapi", version.ref = "quarkus" }
 quarkus-smallrye-health = { group = "io.quarkus", name = "quarkus-smallrye-health", version.ref = "quarkus" }
+quarkus-micrometer-registry-prometheus = { group = "io.quarkus", name = "quarkus-micrometer-registry-prometheus", version.ref = "quarkus" }
 quarkus-jdbc-mysql = { group = "io.quarkus", name = "quarkus-jdbc-mysql", version.ref = "quarkus" }
 quarkus-mybatis = { group = "io.quarkiverse.mybatis", name = "quarkus-mybatis", version.ref = "quarkus-mybatis" }
+
 quarkus-junit5-mockito = { group = "io.quarkus", name = "quarkus-junit5-mockito", version.ref = "quarkus" }
 rest-assured = { group = "io.rest-assured", name = "rest-assured", version.ref = "rest-assured" }
 

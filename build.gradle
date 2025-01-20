@@ -19,6 +19,7 @@ dependencies {
     implementation libs.quarkus.hibernate.validator
     implementation libs.quarkus.smallrye.openapi
     implementation libs.quarkus.smallrye.health
+    implementation libs.quarkus.micrometer.registry.prometheus
     implementation libs.quarkus.jdbc.mysql
     implementation libs.quarkus.mybatis
     testImplementation libs.quarkus.junit5.mockito
