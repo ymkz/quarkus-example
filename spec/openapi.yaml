@@ -2,6 +2,16 @@
 openapi: 3.1.0
 components:
   schemas:
+    AddBookRequestBody:
+      type: object
+      properties:
+        isbn:
+          type: string
+        title:
+          type: string
+        price:
+          type: integer
+          format: int32
     BookOrder:
       type: string
       enum:
@@ -15,6 +25,48 @@ components:
       - UNPUBLISHED
       - PUBLISHED
       - OUT_OF_PRINT
+    FindBooksQueryParam:
+      description: 書籍検索クエリパラメータ
+      type: object
+      properties:
+        isbn:
+          type: string
+        title:
+          type: string
+        priceFrom:
+          type: integer
+          format: int32
+          minimum: 0
+        priceTo:
+          type: integer
+          format: int32
+          minimum: 0
+        status:
+          $ref: "#/components/schemas/BookStatus"
+        publishedTimeStart:
+          $ref: "#/components/schemas/Instant"
+        publishedTimeEnd:
+          $ref: "#/components/schemas/Instant"
+        order:
+          $ref: "#/components/schemas/BookOrder"
+        offset:
+          type: integer
+          format: int32
+          minimum: 0
+        limit:
+          type: integer
+          format: int32
+          maximum: 100
+          minimum: 1
+    FindBooksResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: "#/components/schemas/Pagination"
+        hits:
+          type: array
+          items:
+            $ref: "#/components/schemas/Hit"
     Hit:
       type: object
       properties:
@@ -70,21 +122,18 @@ components:
         offset:
           type: integer
           format: int32
+          examples:
+          - 0
         limit:
           type: integer
           format: int32
+          examples:
+          - 100
         total:
           type: integer
           format: int32
-    findBooksResponse:
-      type: object
-      properties:
-        pagination:
-          $ref: "#/components/schemas/Pagination"
-        hits:
-          type: array
-          items:
-            $ref: "#/components/schemas/Hit"
+          examples:
+          - 1
 info:
   title: API仕様書
   version: 1.0.0
@@ -96,7 +145,7 @@ servers:
 paths:
   /api/v1/books:
     get:
-      summary: booksを検索する
+      summary: 書籍データを検索する
       operationId: findBooks
       tags:
       - book
@@ -107,6 +156,21 @@ paths:
         in: query
         schema:
           type: string
+      - description: ISBN-13:完全一致
+        example: "9784873115658"
+        name: isbn
+        in: query
+        schema:
+          type: string
+      - description: 取得数
+        name: limit
+        in: query
+        schema:
+          type: integer
+          format: int32
+          maximum: 100
+          minimum: 1
+          default: "100"
       - description: 取得数
         name: limit
         in: query
@@ -124,6 +188,21 @@ paths:
           format: int32
           minimum: 0
           default: "0"
+      - description: 取得開始位置
+        name: offset
+        in: query
+        schema:
+          type: integer
+          format: int32
+          minimum: 0
+          default: "0"
+      - description: 並び順
+        name: order
+        in: query
+        schema:
+          allOf:
+          - $ref: "#/components/schemas/BookOrder"
+          - default: -published_at
       - description: 並び順
         name: order
         in: query
@@ -133,6 +212,20 @@ paths:
           - default: -published_at
       - description: 価格:下限
         name: priceFrom
+        in: query
+        schema:
+          type: integer
+          format: int32
+          minimum: 0
+      - description: 価格:下限
+        name: priceFrom
+        in: query
+        schema:
+          type: integer
+          format: int32
+          minimum: 0
+      - description: 価格:上限
+        name: priceTo
         in: query
         schema:
           type: integer
@@ -150,6 +243,16 @@ paths:
         in: query
         schema:
           $ref: "#/components/schemas/Instant"
+      - description: 出版日:終了
+        name: publishedTimeEnd
+        in: query
+        schema:
+          $ref: "#/components/schemas/Instant"
+      - description: 出版日:開始
+        name: publishedTimeStart
+        in: query
+        schema:
+          $ref: "#/components/schemas/Instant"
       - description: 出版日:開始
         name: publishedTimeStart
         in: query
@@ -160,6 +263,16 @@ paths:
         in: query
         schema:
           $ref: "#/components/schemas/BookStatus"
+      - description: ステータス
+        name: status
+        in: query
+        schema:
+          $ref: "#/components/schemas/BookStatus"
+      - description: 書籍タイトル:部分一致
+        name: title
+        in: query
+        schema:
+          type: string
       - description: 書籍タイトル:部分一致
         name: title
         in: query
@@ -167,8 +280,22 @@ paths:
           type: string
       responses:
         "200":
-          description: OK
+          description: 正常系
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/findBooksResponse"
+                $ref: "#/components/schemas/FindBooksResponse"
+    post:
+      summary: 書籍データを作成する
+      operationId: addBook
+      tags:
+      - book
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddBookRequestBody"
+        required: true
+      responses:
+        "201":
+          description: Created

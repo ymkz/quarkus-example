@@ -5,10 +5,13 @@ import dev.ymkz.domain.value.BookStatus;
 import java.util.List;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
-@Schema(name = "findBooksResponse")
+@Schema(name = "FindBooksResponse")
 public record FindBooksResponse(Pagination pagination, List<Hit> hits) {
 
-  record Pagination(int offset, int limit, int total) {}
+  record Pagination(
+      @Schema(example = "0") int offset,
+      @Schema(example = "100") int limit,
+      @Schema(example = "1") int total) {}
 
   record Hit(
       @Schema(example = "1") long id,
