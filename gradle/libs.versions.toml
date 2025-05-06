@@ -1,6 +1,6 @@
 [versions]
 quarkus = "3.22.0"
-quarkus-mybatis = "2.3.2"
+quarkus-mybatis = "2.4.0"
 rest-assured = "4.5.1"
 spotless = "7.0.2"
 
