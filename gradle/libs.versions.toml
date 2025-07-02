@@ -1,8 +1,8 @@
 [versions]
-quarkus = "3.24.0"
+quarkus = "3.24.1"
 quarkus-mybatis = "2.4.0"
 rest-assured = "4.5.1"
-spotless = "7.0.2"
+spotless = "7.0.3"
 
 [libraries]
 quarkus-arc = { group = "io.quarkus", name = "quarkus-arc", version.ref = "quarkus" }
