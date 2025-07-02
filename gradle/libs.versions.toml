@@ -1,7 +1,7 @@
 [versions]
 quarkus = "3.24.1"
 quarkus-mybatis = "2.4.0"
-rest-assured = "4.5.1"
+rest-assured = "5.5.5"
 spotless = "7.0.3"
 
 [libraries]
