@@ -1,5 +1,5 @@
 [versions]
-quarkus = "3.28.4"
+quarkus = "3.29.0"
 quarkus-mybatis = "2.4.1"
 rest-assured = "4.5.1"
 spotless = "7.2.1"
